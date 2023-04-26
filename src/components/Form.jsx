@@ -2,6 +2,8 @@ import  React, { useState, useEffect, useRef } from 'react';
 import TodoCreator from "./FormInput";
 import TodoList from "./List";
 import { createMuiTheme } from "@material-ui/core/styles";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
 
 
 const theme = createMuiTheme({
@@ -12,10 +14,11 @@ const theme = createMuiTheme({
 
 const Form = () => {
 
+    const [darkMode, setDarkMode] = useState(false);
     const [ newTodo, setNewTodo ] = useState('');
     const [ todos, setTodos ] = useState([
         {
-            text: "Learn about React",
+            text: "Watch Man City vs Arsernal",
             isCompleted: false,
             isEditing: false
         },
@@ -25,8 +28,8 @@ const Form = () => {
             isEditing: false
         },
         {
-            text: "Build really cool todo app",
-            isCompleted: false,
+            text: "Wash dishes",
+            isCompleted: true,
             isEditing: false
         }
     ]);
@@ -93,11 +96,28 @@ const Form = () => {
         setNewTodo(todo);
     }
 
+    const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    console.log(`I am ${darkMode}`);
+    }
+
     useEffect(() => {
 
     }, [todos])
 
+    useEffect(() => {
+        if (darkMode) {
+          document.body.style.background = 'gray';
+        } else {
+          document.body.style.background = 'white';
+        }
+      }, [darkMode]);
+
     return (
+        <>
+        <button onClick={toggleDarkMode} className='toggledarkmode'>
+            {darkMode ? <DarkModeIcon /> : <Brightness4Icon />}
+            </button>
         <form onSubmit={handleSubmit} className="form">
 
                 <TodoCreator
@@ -121,6 +141,7 @@ const Form = () => {
                     preventSubmit={preventSubmit}
                 />
             </form>
+        </>
     )
 }
 

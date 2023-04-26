@@ -44,7 +44,7 @@ const TodoCreator = ({ theme, todo, setTodo, clearInput, inputRef, isInputEmpty,
                         <></>
                         :
                         <>
-                            <FormHelperText id="component-error-text">Task can't be empty</FormHelperText>
+                            <FormHelperText id="component-error-text">Enter some task</FormHelperText>
                         </>
                     }
                 </FormControl>
